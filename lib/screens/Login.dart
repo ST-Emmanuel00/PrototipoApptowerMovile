@@ -1,3 +1,5 @@
+import 'package:apptower/screens/FormResidentes.dart';
+import 'package:apptower/screens/Residentes.dart';
 import 'package:apptower/theme/theme.dart';
 import 'package:apptower/widgets/input.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +10,6 @@ final TextEditingController nombreEspacioController = TextEditingController();
 final TextEditingController areaEspacioController = TextEditingController();
 final TextEditingController capacidadEspacioController =
     TextEditingController();
-
-// ... Otro código ...
-
-final List<String> tiposEspacios = [
-  "APARTAMENTO",
-  "SALON SOCIAL",
-  "ZONA HUMEDA"
-];
-final List<String> estados = ["ACTIVO", "INACTIVO"];
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -32,7 +25,7 @@ class _LoginState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Log in',
+      title: 'Apptower Login',
       home: Scaffold(
         // backgroundColor: const Color.fromRGBO(248, 249, 250, 1),
         body: Center(
@@ -72,19 +65,18 @@ class _LoginState extends State<LogIn> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.0),
                           ),
-                          elevation:
-                              4.0, // Ajusta el valor según tu preferencia
-                          minimumSize: const Size(double.infinity,
-                              50), // Ancho y alto mínimos del botón
+                          elevation: 4.0, 
+                          minimumSize: const Size(double.infinity, 50), 
                         ),
-                        onPressed: () {
-                          final route = MaterialPageRoute(
-                            builder: (context) =>
-                                const Text("Aqui va el navegador"),
-                          );
-                          Navigator.push(context, route);
 
-                          setState(() {});
+                        // Funcion de Elevatedbutton para cambiar de vista
+                        
+                        onPressed: () {
+                          print("Diste click en formulario de residentes");
+                          
+                          final route = MaterialPageRoute(
+                              builder: (context) => Residentes() );
+                          Navigator.push(context, route);
                         },
                         child: const Text("Ingresar"),
                       ),

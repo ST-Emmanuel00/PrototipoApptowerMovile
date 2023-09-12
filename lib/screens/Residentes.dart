@@ -1,12 +1,16 @@
+import 'package:apptower/screens/FormResidentes.dart';
+import 'package:apptower/screens/Login.dart';
 import 'package:flutter/material.dart';
 
+import '../controller/contollerResientes.dart';
 import '../theme/theme.dart';
-import '../widgets/input.dart';
-import '../widgets/selectInput.dart';
+import '../widgets/residentesCard.dart';
 
-void main() => runApp(Residentes());
+// void main() => runApp(Residentes());
 
 class Residentes extends StatefulWidget {
+  // final List<Map<String, dynamic>> residentes;
+
   Residentes({super.key});
 
   @override
@@ -14,38 +18,34 @@ class Residentes extends StatefulWidget {
 }
 
 class _ResidentesState extends State<Residentes> {
-  String mensaje = "";
-  TextEditingController tipo_documento_residente = TextEditingController();
-  TextEditingController nomnumero_documento_residentebre =
-      TextEditingController();
-  TextEditingController nombre_residente = TextEditingController();
-  TextEditingController apellido_residente = TextEditingController();
-  TextEditingController fecha_nacimiento = TextEditingController();
-  TextEditingController genero_residente = TextEditingController();
-  TextEditingController telefono_residente = TextEditingController();
-  TextEditingController correo = TextEditingController();
-  TextEditingController tipo_residente = TextEditingController();
-  TextEditingController residencia = TextEditingController();
-  TextEditingController habita = TextEditingController();
-  TextEditingController fecha_inicio = TextEditingController();
-  TextEditingController fecha_fin = TextEditingController();
-  TextEditingController estado = TextEditingController();
+  late Future<List<Map<String, dynamic>>> futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    futureData = _cargarDatos();
+  }
+
+  Future<List<Map<String, dynamic>>> _cargarDatos() async {
+    final datos = await ControllerResidentes()
+        .fetchData('https://apptower-bk.onrender.com/api/residentes');
+    return List<Map<String, dynamic>>.from(datos['residentes']);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Crear residentes',
+      title: 'Residentes',
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(248, 249, 250, 1),
           elevation: 0,
-          title: Text("Residentes", style: AppTheme.textStyle),
+          title: const Text("Residentes", style: AppTheme.textStyle),
           actions: [
             IconButton(
                 onPressed: () {
-                  final route = MaterialPageRoute(
-                      builder: (context) =>
-                          const Text("Cambiar por un Screen"));
+                  final route =
+                      MaterialPageRoute(builder: (context) => const LogIn());
                   Navigator.push(context, route);
                 },
                 icon: const Icon(
@@ -54,85 +54,40 @@ class _ResidentesState extends State<Residentes> {
                 ))
           ],
         ),
-        body: Center(
-          child: ListView(
-            children: [
-              InputSelect(
-                  titulo: "Tipo de documento",
-                  controller: tipo_documento_residente,
-                  lista: const [
-                    "Cedula ciudadania",
-                    "Tarjeta de indetidad",
-                    "Tarjeta de identidad"
-                  ]),
-              InputSelect(
-                  lista: const ["Masculino", "Femenino", "Otro"],
-                  titulo: "Genero",
-                  controller: genero_residente),
-              Input(
-                  hintText: "Ingrese numero de documento",
-                  labelText: "Numero de documento",
-                  controlador: nomnumero_documento_residentebre),
-              Input(
-                  hintText: "Ingrese el nombre",
-                  labelText: "Nombre residente",
-                  controlador: nombre_residente),
-              Input(
-                  hintText: "Ingrese apellido",
-                  labelText: "Apellidos residente",
-                  controlador: apellido_residente),
-              Input(
-                  hintText: "Ingrese fecha de nacimiento",
-                  labelText: "Fecha de nacimiento",
-                  controlador: fecha_nacimiento),
+        body: FutureBuilder<List<Map<String, dynamic>>>(
+          future: futureData,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
+            } else {
+              final List<Map<String, dynamic>> residentes =
+                  snapshot.data as List<Map<String, dynamic>>;
 
-              Input(
-                  hintText: "Ingrese su telefono",
-                  labelText: "Telefono",
-                  controlador: telefono_residente),
+              return ListView.builder(
+                itemCount: residentes.length,
+                itemBuilder: (context, index) {
+                  final residente = residentes[index];
 
-              Input(
-                  hintText: "Ingrese su correo",
-                  labelText: "Correo",
-                  controlador: correo),
-              
-              Input(
-                  hintText: "Ingrese su correo",
-                  labelText: "Correo",
-                  controlador: correo),
-
-              // Boton del formulario
-
-              Padding(
-                padding: AppTheme.selectPading,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: AppTheme.ApptowerBlue,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40.0),
-                      ),
-                      elevation: 4.0, // Ajusta el valor según tu preferencia
-                      minimumSize: const Size(double.infinity,
-                          50), // Ancho y alto mínimos del botón
-                    ),
-                    child: const Text("Registrar Residente"),
-                    onPressed: () {
-                      mensaje = "Le diste click";
-
-                      setState(() {});
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(50.0),
-                child: Center(
-                    child: Column(
-                  children: [
-                    Text(mensaje),
-                  ],
-                )),
-              ),
-            ],
-          ),
+                  return ResidentesCard(residente: residente);
+                },
+              );
+            }
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: AppTheme.ApptowerBlue,
+          onPressed: () {
+            final route =
+                MaterialPageRoute(builder: (context) => FormResidentes());
+            Navigator.push(context, route);
+          },
+          child: const Icon(Icons.add),
         ),
       ),
     );
