@@ -7,13 +7,11 @@ class AppTheme {
   static const textStyle = TextStyle(
       color: Color.fromRGBO(0, 26, 78, 1), fontWeight: FontWeight.bold);
 
-  static const estadoColorRed =
-      TextStyle(color: Colors.red);
+  static const estadoColorRed = TextStyle(color: Colors.red);
 
-      static const colorGrey = Colors.grey;
+  static const colorGrey = Colors.grey;
 
-  static const estadoColorGreen =
-      TextStyle(color: Colors.green);
+  static const estadoColorGreen = TextStyle(color: Colors.green);
 
   static const textColorCard = Color.fromRGBO(27, 104, 255, 1);
   static const textCard = TextStyle(
@@ -23,6 +21,8 @@ class AppTheme {
       color: Color.fromRGBO(27, 104, 255, 1), fontWeight: FontWeight.bold);
 
   static const ApptowerBlue = Color.fromRGBO(0, 26, 78, 1);
+  static const ApptowerWhite = Color.fromRGBO(248, 249, 250, 1);
+
   static const bordeInicial =
       BorderSide(color: Color.fromRGBO(248, 249, 250, 1));
   static const bordeSelecionado =

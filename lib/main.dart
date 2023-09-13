@@ -1,6 +1,5 @@
-import 'package:apptower/screens/FormResidentes.dart';
 import 'package:apptower/screens/Login.dart';
-import 'package:apptower/screens/Residentes.dart';
+import 'package:apptower/screens/ViewsEspacios/Espacios.dart';
 import 'package:flutter/material.dart';
 
 void main() {

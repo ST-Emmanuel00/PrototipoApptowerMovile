@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../controller/contollerResientes.dart';
-import '../screens/EditResidentes.dart';
-import '../screens/Residentes.dart';
+import '../screens/ViewsResidentes/EditResidentes.dart';
+import '../screens/ViewsResidentes/Residentes.dart';
 import '../theme/theme.dart';
 
 void main() => runApp(const MyApp());

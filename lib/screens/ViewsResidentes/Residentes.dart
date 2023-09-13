@@ -1,10 +1,11 @@
-import 'package:apptower/screens/FormResidentes.dart';
 import 'package:apptower/screens/Login.dart';
 import 'package:flutter/material.dart';
 
-import '../controller/contollerResientes.dart';
-import '../theme/theme.dart';
-import '../widgets/residentesCard.dart';
+import '../../controller/contollerResientes.dart';
+import '../../theme/theme.dart';
+import '../../widgets/DrawerApptower.dart';
+import '../../widgets/residentesCard.dart';
+import 'CreateResidentes.dart';
 
 // void main() => runApp(Residentes());
 
@@ -38,22 +39,22 @@ class _ResidentesState extends State<Residentes> {
       title: 'Residentes',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(248, 249, 250, 1),
-          elevation: 0,
-          title: const Text("Residentes", style: AppTheme.textStyle),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  final route =
-                      MaterialPageRoute(builder: (context) => const LogIn());
-                  Navigator.push(context, route);
-                },
-                icon: const Icon(
-                  Icons.logout,
-                  color: AppTheme.ApptowerBlue,
-                ))
-          ],
-        ),
+            backgroundColor: const Color.fromRGBO(248, 249, 250, 1),
+            elevation: 0,
+            title: const Text("Residentes", style: AppTheme.textStyle),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    final route =
+                        MaterialPageRoute(builder: (context) => const LogIn());
+                    Navigator.push(context, route);
+                  },
+                  icon: const Icon(
+                    Icons.logout,
+                    color: AppTheme.ApptowerBlue,
+                  ))
+            ],
+            iconTheme: const IconThemeData(color: AppTheme.ApptowerBlue)),
         body: FutureBuilder<List<Map<String, dynamic>>>(
           future: futureData,
           builder: (context, snapshot) {
@@ -80,11 +81,12 @@ class _ResidentesState extends State<Residentes> {
             }
           },
         ),
+        drawer: const ApptowerDrawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: AppTheme.ApptowerBlue,
           onPressed: () {
             final route =
-                MaterialPageRoute(builder: (context) => FormResidentes());
+                MaterialPageRoute(builder: (context) => CreateResidentes());
             Navigator.push(context, route);
           },
           child: const Icon(Icons.add),
