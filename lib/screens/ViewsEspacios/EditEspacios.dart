@@ -110,21 +110,11 @@ class _ResidentesState extends State<EditEspacios> {
                   onPressed: () async {
                     final Map<String, dynamic> espacioModificado = {
                       "_id": widget.espacios['_id'],
-                      // "tipo_documento_residente": tipo_documento_residente.text,
-                      // "numero_documento_residente":
-                      //     nomnumero_documento_residentebre.text,
-                      // "nombre_residente": nombre_residente.text,
-                      // "apellido_residente": apellido_residente.text,
-                      // "fecha_nacimiento": "2000-04-28",
-                      // "genero_residente": genero_residente.text,
-                      // "telefono_residente": telefono_residente.text,
-                      // "correo": correo.text,
-                      // "tipo_residente": tipo_residente.text,
-                      // "residencia": "null",
-                      // "habita": true,
-                      // "fecha_inicio": "2000-04-28",
-                      // "fecha_fin": "2022-06-28",
-                      // "estado": estado.text
+                      "tipo_espacio": tipo_espacio.text,
+                      "nombre_espacio": nombre_espacio.text,
+                      "area": area.text,
+                      "capacidad": capacidad.text,
+                      "estado": estado.text
                     };
 
                     try {
