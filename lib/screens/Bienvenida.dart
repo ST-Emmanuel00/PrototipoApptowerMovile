@@ -1,4 +1,5 @@
 import 'package:apptower/screens/Login.dart';
+import 'package:apptower/screens/camara.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/theme.dart';
@@ -33,7 +34,17 @@ class _BienvenidaState extends State<Bienvenida> {
                   icon: const Icon(
                     Icons.logout,
                     color: AppTheme.ApptowerBlue,
-                  ))
+                  )),
+              IconButton(
+                  onPressed: () {
+                    final route =
+                        MaterialPageRoute(builder: (context) => const Camera());
+                    Navigator.push(context, route);
+                  },
+                  icon: const Icon(
+                    Icons.camera,
+                    color: AppTheme.ApptowerBlue,
+                  )),
             ],
             iconTheme: IconThemeData(color: AppTheme.ApptowerBlue)),
         body: const Center(

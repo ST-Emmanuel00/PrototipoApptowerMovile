@@ -83,7 +83,7 @@ class _LoginState extends State<LogIn> {
                             controlador: usuario)),
                     Align(
                       alignment: Alignment.center,
-                      child: InputLogIn(
+                      child: InputContrasena(
                         labelText: "Contraseña",
                         hintText: "Escribe aquí tu contraseña",
                         controlador: contrasena,
