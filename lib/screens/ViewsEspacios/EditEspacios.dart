@@ -36,10 +36,8 @@ class _ResidentesState extends State<EditEspacios> {
   _updateFields() {
     tipo_espacio.text = widget.espacios['tipo_espacio'];
     nombre_espacio.text = widget.espacios['nombre_espacio'];
-    area.text = widget.espacios['area'] == null ? "" : widget.espacios['area'];
-    capacidad.text = widget.espacios['capacidad'] == null
-        ? ""
-        : widget.espacios['capacidad'];
+    area.text = widget.espacios['area'] == null ? "" : widget.espacios['area'].toString();
+    capacidad.text = widget.espacios['capacidad'] == null? "": widget.espacios['capacidad'].toString();
     estado.text = widget.espacios['estado'];
   }
 
